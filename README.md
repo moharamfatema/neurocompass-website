@@ -16,13 +16,17 @@ All the provided bash commands are for Unix-based systems. If you are using a Wi
 To get started you need to setup the backend and frontend packages. First, clone the repository, then navigate to the `backend` directory and create a virtual environment:
 
 ```bash
-cd backend && source .venv/bin/activate && uv pip install -r requirements.txt
+cd backend
+uv venv
+source .venv/bin/activate
+uv pip install -r requirements.txt
 ```
 
 To setup the frontend, navigate to the `frontend` directory and install the required dependencies:
 
 ```bash
-cd frontend && npm install
+cd frontend
+npm install
 ```
 
 Add the required assets to the `backend/assets` directory. The assets include the models and the dataset. The models should be placed in the `backend/assets/models` directory, and the dataset should be placed in the `backend/assets/data` directory.
@@ -30,7 +34,8 @@ Add the required assets to the `backend/assets` directory. The assets include th
 To start the backend development server, run the following command inside the `backend` directory:
 
 ```bash
-source .venv/bin/activate && python3 src/main.py
+source .venv/bin/activate
+python3 src/main.py
 ```
 
 This will start the FastAPI server on `http://localhost:8000`.
