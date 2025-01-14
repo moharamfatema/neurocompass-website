@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cluster Plot: Students in Courses</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        .cluster-plot circle {
+            stroke: #fff;
+            stroke-width: 1.5px;
+        }
+
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            pointer-events: none;
+            font-size: 12px;
+            font-family: sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cluster Plot: Students in Courses</h1>
+    <div id="tooltip" class="tooltip" style="display: none;"></div>
+    <svg id="clusterPlot" width="960" height="600"></svg>
+
+    <script>
+        // Sample data for courses and students
+        const data = [
+            { course: "Interactive AI Basics", x: 100, y: 200, students: 20 },
+            { course: "Applied AI", x: 300, y: 250, students: 30 },
+            { course: "Introduction to Machine Learning", x: 200, y: 100, students: 15 },
+            { course: "AI Ethics", x: 400, y: 300, students: 25 },
+            { course: "AI Principles", x: 150, y: 400, students: 20 },
+            { course: "Machine Learning Fundamentals", x: 600, y: 200, students: 18 },
+            { course: "Machine Learning: Coding Exercises", x: 350, y: 450, students: 40 },
+            { course: "AI Concepts: Video Series", x: 500, y: 100, students: 12 },
+            { course: "Advanced AI: Research Papers", x: 700, y: 300, students: 30 },
+        ];
+
+        const width = 960;
+        const height = 600;
+
+        const svg = d3.select("#clusterPlot")
+            .attr("width", width)
+            .attr("height", height);
+
+        const color = d3.scaleOrdinal(d3.schemeCategory10);
+
+        // Tooltip
+        const tooltip = d3.select("#tooltip");
+
+        // Draw circles for each cluster
+        svg.selectAll("circle")
+            .data(data)
+            .enter()
+            .append("circle")
+            .attr("cx", d => d.x)
+            .attr("cy", d => d.y)
+            .attr("r", d => d.students * 1.5) // Circle size based on the number of students
+            .attr("fill", (d, i) => color(i))
+            .on("mouseover", (event, d) => {
+                tooltip
+                    .style("left", `${event.pageX + 10}px`)
+                    .style("top", `${event.pageY + 10}px`)
+                    .style("display", "block")
+                    .html(`<strong>${d.course}</strong><br>Students: ${d.students}`);
+            })
+            .on("mouseout", () => {
+                tooltip.style("display", "none");
+            });
+
+        // Add labels for each cluster
+        svg.selectAll("text")
+            .data(data)
+            .enter()
+            .append("text")
+            .attr("x", d => d.x)
+            .attr("y", d => d.y - 15)
+            .attr("text-anchor", "middle")
+            .attr("font-size", "12px")
+            .attr("font-family", "sans-serif")
+            .text(d => d.course);
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Histogram</title>
+    <script src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>
+</head>
+<body>
+    <div id="interactiveHistogram" style="width:800px;height:400px;"></div>
+    <script>
+        // Data for the histogram
+        const scores = [
+            0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 
+            50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100
+        ]; // Bin edges (x-axis)
+        const frequencies = [
+            9, 0, 2, 5, 3, 5, 5, 10, 18, 21, 28, 60, 59, 83, 104, 129, 110, 129, 88, 132
+        ]; // Frequencies (y-axis)
+
+        // Trace for the histogram
+        const trace = {
+            x: scores,
+            y: frequencies,
+            type: 'bar',
+            marker: {
+                color: 'rgba(255, 165, 0, 0.7)', // Orange color
+                line: {
+                    color: 'rgba(255, 165, 0, 1.0)', // Darker border color
+                    width: 1
+                }
+            }
+        };
+
+        // Layout of the chart
+        const layout = {
+            title: 'Distribution of Scores',
+            xaxis: {
+                title: 'Score',
+                tickangle: 0
+            },
+            yaxis: {
+                title: 'Frequency'
+            },
+            bargap: 0.1
+        };
+
+        // Render the plot
+        Plotly.newPlot('interactiveHistogram', [trace], layout);
+    </script>
+</body>
+</html>

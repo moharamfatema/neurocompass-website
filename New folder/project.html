@@ -1,0 +1,111 @@
+// Recommender System in JavaScript
+// Libraries: D3.js for data visualization, and PapaParse for CSV parsing
+
+// 1. Include Required Libraries
+// Include D3.js and PapaParse from CDNs in your HTML file.
+// <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.2/d3.min.js"></script>
+// <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+
+// 2. Load CSV Files
+const csvFiles = [
+  { name: 'assessments', url: 'path/to/assessments.csv' },
+  { name: 'courses', url: 'path/to/courses.csv' },
+  { name: 'merged_df', url: 'path/to/merged_df.csv' },
+  { name: 'studentAssessment', url: 'path/to/studentAssessment.csv' },
+  { name: 'studentInfo', url: 'path/to/studentInfo.csv' },
+  { name: 'studentRegistration', url: 'path/to/studentRegistration.csv' },
+  { name: 'studentVle', url: 'path/to/studentVle.csv' },
+  { name: 'vle', url: 'path/to/vle.csv' }
+];
+
+let data = {};
+
+function loadCSVFiles() {
+  return Promise.all(
+    csvFiles.map(file =>
+      fetch(file.url)
+        .then(response => response.text())
+        .then(text => {
+          data[file.name] = Papa.parse(text, { header: true, dynamicTyping: true }).data;
+        })
+    )
+  );
+}
+
+// 3. Process and Merge Data
+function processData() {
+  // Example: Create a mapping of student engagement based on studentInfo and studentVle
+  const studentClicks = data.studentVle.reduce((acc, row) => {
+    acc[row.id_student] = (acc[row.id_student] || 0) + row.sum_click;
+    return acc;
+  }, {});
+
+  data.studentInfo.forEach(student => {
+    student.engagement = studentClicks[student.id_student] || 0;
+    student.engagement_level = student.engagement > 100 ? 'High' : student.engagement > 50 ? 'Moderate' : 'Low';
+  });
+}
+
+// 4. Build Recommendation Logic
+function recommendCourses(studentId) {
+  const student = data.studentInfo.find(s => s.id_student === studentId);
+  if (!student) return { error: 'Student not found' };
+
+  const engagementLevel = student.engagement_level;
+  const recommendations = {
+    High: ['Advanced AI', 'Collaborative Projects', 'Deep Learning'],
+    Moderate: ['AI Basics', 'Interactive Case Studies', 'Machine Learning Workshops'],
+    Low: ['AI Overview', 'Foundations of Machine Learning', 'Intro to Data Science']
+  };
+
+  return {
+    student,
+    courses: recommendations[engagementLevel] || []
+  };
+}
+
+// 5. Visualizations
+function visualizeEngagementLevels() {
+  const engagementData = data.studentInfo.reduce((acc, row) => {
+    acc[row.engagement_level] = (acc[row.engagement_level] || 0) + 1;
+    return acc;
+  }, {});
+
+  const svg = d3.select('#engagement-chart')
+    .append('svg')
+    .attr('width', 600)
+    .attr('height', 400);
+
+  const xScale = d3.scaleBand()
+    .domain(Object.keys(engagementData))
+    .range([0, 600])
+    .padding(0.4);
+
+  const yScale = d3.scaleLinear()
+    .domain([0, d3.max(Object.values(engagementData))])
+    .range([400, 0]);
+
+  svg.selectAll('.bar')
+    .data(Object.entries(engagementData))
+    .enter()
+    .append('rect')
+    .attr('x', d => xScale(d[0]))
+    .attr('y', d => yScale(d[1]))
+    .attr('width', xScale.bandwidth())
+    .attr('height', d => 400 - yScale(d[1]))
+    .attr('fill', 'steelblue');
+
+  svg.append('g')
+    .attr('transform', 'translate(0, 400)')
+    .call(d3.axisBottom(xScale));
+
+  svg.append('g')
+    .call(d3.axisLeft(yScale));
+}
+
+// 6. Main Execution
+loadCSVFiles().then(() => {
+  processData();
+  console.log(recommendCourses(12345)); // Replace with actual student ID
+  visualizeEngagementLevels();
+});
