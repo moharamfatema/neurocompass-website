@@ -3,3 +3,4 @@ uvicorn
 joblib
 pandas
 scikit-learn
+pymongo

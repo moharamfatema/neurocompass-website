@@ -1,3 +1,4 @@
+from pathlib import Path
 import csv
 from pymongo import MongoClient
 
@@ -16,9 +17,10 @@ except Exception as e:
 db = client['db']
 collection = db['col']
 
-
+# path = "../assets/data/merged_df.csv"
+path = Path(__file__).resolve().parents[1] / "assets/data/merged_df.csv"
 # Read and insert CSV data into MongoDB
-with open('merged_df.csv', 'r') as file:
+with open(path, 'r') as file:
     csv_data = csv.DictReader(file) # Automatically uses the first row as header
     for row in csv_data:
         collection.insert_one(row)
