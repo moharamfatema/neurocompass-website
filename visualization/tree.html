@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treemap: Course Recommendations</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-treemap"></script>
+</head>
+<body>
+    <h1>Treemap: Course Recommendations</h1>
+    <canvas id="treemapChart" width="800" height="400"></canvas>
+
+    <script>
+        // Finalized data with course names and random values
+        const treemapData = {
+            datasets: [{
+                tree: [
+                    { category: "Collaborative", engagement: "High Engagement", label: "Interactive AI Basics", value: Math.floor(Math.random() * 100) },
+                    { category: "Collaborative", engagement: "High Engagement", label: "Applied AI", value: Math.floor(Math.random() * 100) },
+                    { category: "Collaborative", engagement: "Moderate Engagement", label: "Introduction to Machine Learning", value: Math.floor(Math.random() * 100) },
+                    { category: "Collaborative", engagement: "Low Engagement", label: "AI Ethics", value: Math.floor(Math.random() * 100) },
+                    { category: "Offline Content", engagement: "High Engagement", label: "AI Principles", value: Math.floor(Math.random() * 100) },
+                    { category: "Offline Content", engagement: "Moderate Engagement", label: "Machine Learning Fundamentals", value: Math.floor(Math.random() * 100) },
+                    { category: "Offline Content", engagement: "Low Engagement", label: "Introduction to Data Science", value: Math.floor(Math.random() * 100) },
+                    { category: "Interactive", engagement: "High Engagement", label: "Machine Learning: Coding Exercises", value: Math.floor(Math.random() * 100) },
+                    { category: "Interactive", engagement: "Moderate Engagement", label: "AI Applications: Case Studies", value: Math.floor(Math.random() * 100) },
+                    { category: "Interactive", engagement: "Low Engagement", label: "Data Science: Interactive Projects", value: Math.floor(Math.random() * 100) },
+                    { category: "Informational", engagement: "High Engagement", label: "Machine Learning: Structured Videos", value: Math.floor(Math.random() * 100) },
+                    { category: "Informational", engagement: "Moderate Engagement", label: "AI Concepts: Video Series", value: Math.floor(Math.random() * 100) },
+                    { category: "Informational", engagement: "Low Engagement", label: "Data Science: Lecture Notes", value: Math.floor(Math.random() * 100) },
+                    { category: "Resource-Based", engagement: "High Engagement", label: "Advanced AI: Research Papers", value: Math.floor(Math.random() * 100) },
+                    { category: "Resource-Based", engagement: "Moderate Engagement", label: "Data Science: White Papers", value: Math.floor(Math.random() * 100) },
+                    { category: "Resource-Based", engagement: "Low Engagement", label: "AI Basics: Reading Lists", value: Math.floor(Math.random() * 100) }
+                ],
+                key: "value",
+                groups: ["category", "engagement"],
+                backgroundColor: (ctx) => {
+                    const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'];
+                    return colors[ctx.raw.groupIndex % colors.length];
+                },
+                borderWidth: 1,
+                labels: {
+                    display: true,
+                    formatter: (ctx) => `${ctx.raw.label} (${ctx.raw.value})`
+                }
+            }]
+        };
+
+        // Treemap Chart Configuration
+        const config = {
+            type: 'treemap',
+            data: treemapData,
+            options: {
+                responsive: true,
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: (ctx) => `${ctx.raw.label} (${ctx.raw.category} - ${ctx.raw.engagement}): ${ctx.raw.value}`
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: "Treemap: Course Recommendations by Engagement"
+                    }
+                }
+            }
+        };
+
+        // Render the chart
+        new Chart(document.getElementById('treemapChart'), config);
+    </script>
+</body>
+</html>

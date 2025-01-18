@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Bar Chart</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div id="barChart" style="width: 80%; height: 500px; margin: auto;"></div>
+
+    <script>
+        // Data for the bar chart
+        const educationTypes = ['A Level or Equivalent', 'Lower Than A Level', 'HE Qualification'];
+        const counts = [460, 359, 181];
+
+        // Create the bar chart
+        const data = [{
+            x: educationTypes,
+            y: counts,
+            type: 'bar',
+            marker: {
+                color: ['skyblue', 'orange', 'green']
+            },
+            text: counts.map(String),
+            textposition: 'auto',
+        }];
+// Layout configuration
+        const layout = {
+            title: 'Number of Records by Education Type',
+            xaxis: { title: 'Education Type' },
+            yaxis: { title: 'Number of Records' },
+            margin: { t: 50, l: 50, r: 50, b: 50 },
+        };
+
+        // Render the chart
+        Plotly.newPlot('barChart', data, layout);
+    </script>
+</body>
+</html>

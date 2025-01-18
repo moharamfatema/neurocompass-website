@@ -1,0 +1,111 @@
+// Include Chart.js from a CDN before using this code
+// Example: <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+// Sample dataset
+const sampleData = {
+    Collaborative: [5, 8, 6, 7, 4],
+    Offline: [6, 7, 5, 9, 3],
+    Interactive: [8, 6, 7, 5, 6],
+    Informational: [4, 5, 7, 6, 8],
+    ResourceBased: [7, 8, 5, 6, 7]
+};
+
+const courseLabels = [
+    "Course 1",
+    "Course 2",
+    "Course 3",
+    "Course 4",
+    "Course 5"
+];
+
+// Colors for the charts
+const colors = [
+    'rgba(255, 99, 132, 0.7)',
+    'rgba(54, 162, 235, 0.7)',
+    'rgba(255, 206, 86, 0.7)',
+    'rgba(75, 192, 192, 0.7)',
+    'rgba(153, 102, 255, 0.7)'
+];
+
+// Prepare the data for charts
+const datasetsGrouped = Object.keys(sampleData).map((key, index) => ({
+    label: key,
+    data: sampleData[key],
+    backgroundColor: colors[index],
+}));
+
+const datasetsStacked = datasetsGrouped;
+
+// Create grouped bar chart
+const ctxGrouped = document.getElementById('groupedBarChart').getContext('2d');
+new Chart(ctxGrouped, {
+    type: 'bar',
+    data: {
+        labels: courseLabels,
+        datasets: datasetsGrouped
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: { position: 'top' },
+            title: { display: true, text: 'Grouped Bar Chart' }
+        },
+        scales: {
+            x: { stacked: false },
+            y: { beginAtZero: true }
+        }
+    }
+});
+
+// Create stacked bar chart
+const ctxStacked = document.getElementById('stackedBarChart').getContext('2d');
+new Chart(ctxStacked, {
+    type: 'bar',
+    data: {
+        labels: courseLabels,
+        datasets: datasetsStacked
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: { position: 'top' },
+            title: { display: true, text: 'Stacked Bar Chart' }
+        },
+        scales: {
+            x: { stacked: true },
+            y: { beginAtZero: true, stacked: true }
+        }
+    }
+});
+
+// Create individual bar charts for each category
+Object.keys(sampleData).forEach((category, index) => {
+    const canvasId = `barChart${category}`;
+    const canvas = document.createElement('canvas');
+    canvas.id = canvasId;
+    document.body.appendChild(canvas);
+
+    const ctx = canvas.getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: courseLabels,
+            datasets: [{
+                label: category,
+                data: sampleData[category],
+                backgroundColor: colors[index],
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: true },
+                title: { display: true, text: `${category} Bar Chart` }
+            },
+            scales: {
+                x: { beginAtZero: true },
+                y: { beginAtZero: true }
+            }
+        }
+    });
+});

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Cluster Map: Course Recommendations</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        .link {
+            fill: none;
+            stroke: #ccc;
+            stroke-width: 2px;
+        }
+
+        .node circle {
+            fill: #999;
+            stroke: #fff;
+            stroke-width: 2px;
+            cursor: pointer;
+            transition: fill 0.2s;
+        }
+
+        .node circle:hover {
+            fill: #36A2EB;
+        }
+
+        .node text {
+            font-size: 12px;
+            font-family: sans-serif;
+            pointer-events: none;
+        }
+
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            pointer-events: none;
+            font-size: 12px;
+            font-family: sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Interactive Cluster Map: Course Recommendations</h1>
+    <div id="tooltip" class="tooltip" style="display: none;"></div>
+    <svg id="clusterMap" width="960" height="800"></svg>
+
+    <script>
+        // Data for the cluster map
+        const data = {
+            name: "Courses",
+            children: [
+                {
+                    name: "Collaborative",
+                    children: [
+                        { name: "Interactive AI Basics (High)", value: 80 },
+                        { name: "Applied AI (High)", value: 70 },
+                        { name: "Introduction to Machine Learning (Moderate)", value: 50 },
+                        { name: "AI Ethics (Low)", value: 30 }
+                    ]
+                },
+                {
+                    name: "Offline Content",
+                    children: [
+                        { name: "AI Principles (High)", value: 85 },
+                        { name: "Machine Learning Fundamentals (Moderate)", value: 60 },
+                        { name: "Introduction to Data Science (Low)", value: 40 }
+                    ]
+                },
+                {
+                    name: "Interactive",
+                    children: [
+                        { name: "Machine Learning: Coding Exercises (High)", value: 95 },
+                        { name: "AI Applications: Case Studies (Moderate)", value: 65 },
+                        { name: "Data Science: Interactive Projects (Low)", value: 35 }
+                    ]
+                },
+                {
+                    name: "Informational",
+                    children: [
+                        { name: "Machine Learning: Structured Videos (High)", value: 90 },
+                        { name: "AI Concepts: Video Series (Moderate)", value: 55 },
+                        { name: "Data Science: Lecture Notes (Low)", value: 25 }
+                    ]
+                },
+                {
+                    name: "Resource-Based",
+                    children: [
+                        { name: "Advanced AI: Research Papers (High)", value: 88 },
+                        { name: "Data Science: White Papers (Moderate)", value: 58 },
+                        { name: "AI Basics: Reading Lists (Low)", value: 38 }
+                    ]
+                }
+            ]
+        };
+
+        const width = 960;
+        const height = 800;
+        const radius = 500;
+
+        const svg = d3.select("#clusterMap"),
+            g = svg.append("g").attr("transform", `translate(${width / 2},${height / 2})`);
+
+        const cluster = d3.cluster().size([360, radius - 100]);
+
+        const root = d3.hierarchy(data);
+
+        cluster(root);
+
+        // Tooltip
+        const tooltip = d3.select("#tooltip");
+
+        // Links
+        const link = g
+            .selectAll(".link")
+            .data(root.links())
+            .enter()
+            .append("path")
+            .attr("class", "link")
+            .attr(
+                "d",
+                d3
+                    .linkRadial()
+                    .angle(d => (d.x / 180) * Math.PI)
+                    .radius(d => d.y)
+            );
+
+        // Nodes
+        const node = g
+            .selectAll(".node")
+            .data(root.descendants())
+            .enter()
+            .append("g")
+            .attr("class", "node")
+            .attr("transform", d => `rotate(${d.x - 90}) translate(${d.y},0)`)
+            .on("mouseover", (event, d) => {
+                if (d.data.name) {
+                    tooltip
+                        .style("left", `${event.pageX + 10}px`)
+                        .style("top", `${event.pageY + 10}px`)
+                        .style("display", "block")
+                        .html(`<strong>${d.data.name}</strong>${d.data.value ? `<br>Value: ${d.data.value}` : ""}`);
+                }
+            })
+            .on("mouseout", () => {
+                tooltip.style("display", "none");
+            })
+            .on("click", (event, d) => {
+                // Highlight the clicked node
+                g.selectAll("circle").style("fill", "#999");
+                d3.select(event.currentTarget).select("circle").style("fill", "#FF6384");
+                tooltip
+                    .style("left", `${event.pageX + 10}px`)
+                    .style("top", `${event.pageY + 10}px`)
+                    .style("display", "block")
+                    .html(`<strong>${d.data.name}</strong>${d.data.value ? `<br>Value: ${d.data.value}` : ""}`);
+            });
+
+        node.append("circle").attr("r", 5);
+
+        node
+            .append("text")
+            .attr("dy", "0.31em")
+            .attr("x", d => (d.x < 180 ? 6 : -6))
+            .attr("text-anchor", d => (d.x < 180 ? "start" : "end"))
+            .attr("transform", d => (d.x >= 180 ? "rotate(180)" : null))
+            .text(d => d.data.name);
+    </script>
+</body>
+</html>

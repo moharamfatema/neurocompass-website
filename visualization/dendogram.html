@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step-by-Step Interactive Dendrogram</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div id="dendrogram" style="width: 100%; height: 700px;"></div>
+    <script>
+        // Data structure for the dendrogram
+        const hierarchy = {
+            "Collaborative": {
+                "Moderate Engagement": [
+                    "Interactive AI Basics: Weekly Quizzes and Forums",
+                    "Applied AI: Practical Exercises with Peer Feedback",
+                    "Introduction to Machine Learning: Online Workshops",
+                    "AI Ethics: Case Studies and Discussion Groups"
+                ],
+                "High Engagement": [
+                    "Collaborative AI Projects: Team-Based Learning",
+                    "Advanced AI Techniques: Group Workshops and Peer Reviews",
+                    "Machine Learning Bootcamp: Intensive Group Projects",
+                    "AI in Practice: Team Challenges and Hackathons"
+                ],
+                "Low Engagement": [
+                    "Introduction to AI: Self-Paced Fundamentals",
+                    "AI Basics: Introductory Video Series",
+                    "Foundations of Machine Learning: Self-Study Edition",
+                    "AI for Everyone: Introductory Readings and Quizzes"
+                ]
+            },
+            "Offline Content": {
+                "Moderate Engagement": [
+                    "AI Principles: Self-Study with Case Studies",
+                    "Machine Learning: Offline Course with Practice Problems",
+                    "Applied AI: Textbook and Supplementary Materials",
+                    "Data Science: Case Studies and Analytical Exercises"
+                ],
+                "High Engagement": [
+                    "Advanced AI: Comprehensive Textbook with Projects",
+                    "Deep Learning: In-Depth Study with Capstone Projects",
+                    "AI and Machine Learning: Project-Based Learning",
+                    "Data Science Mastery: Offline Content with Comprehensive Projects"
+                ],
+                "Low Engagement": [
+                    "AI Basics: Essential Readings and Key Concepts",
+                    "Machine Learning Fundamentals: Self-Study Workbook",
+                    "AI Concepts: Downloadable Lecture Series",
+                    "Introduction to Data Science: Offline Learning Modules"
+                ]
+            },
+            "Interactive": {
+                "Moderate Engagement": [
+                    "Machine Learning: Interactive Coding Exercises",
+                    "AI Applications: Interactive Case Studies",
+                    "Data Science: Interactive Projects and Peer Reviews",
+                    "AI Ethics: Discussion Forums and Interactive Scenarios"
+                ],
+                "High Engagement": [
+                    "Advanced AI: Interactive Group Projects and Hackathons",
+                    "Deep Learning: Interactive Labs and Collaborative Projects",
+                    "Machine Learning Mastery: Interactive Workshops and Challenges",
+                    "AI Research: Collaborative Research Projects and Peer Feedback"
+                ],
+                "Low Engagement": [
+                    "AI Basics: Interactive Quizzes and Flashcards",
+                    "Introduction to Machine Learning: Interactive Visualizations",
+                    "AI Fundamentals: Interactive Notebooks",
+                    "AI Concepts: Gamified Learning Modules"
+                ]
+            },
+            "Informational": {
+                "Moderate Engagement": [
+                    "Machine Learning: Structured Video Course",
+                    "AI Concepts: Comprehensive Video Series",
+                    "Data Science: Interactive Reading and Video Modules",
+                    "AI in Practice: Lecture Notes and Case Studies"
+                ],
+                "High Engagement": [
+                    "Advanced AI: Detailed Lecture Series and Readings",
+                    "Deep Learning: Advanced Lecture Series with Supplemental Readings",
+                    "AI and Machine Learning: Research Papers and Advanced Lectures",
+                    "Data Science Masterclass: Comprehensive Reading and Video Content"
+                ],
+                "Low Engagement": [
+                    "AI Overview: Short Video Lectures",
+                    "Introduction to Machine Learning: Podcast Series",
+                    "AI Fundamentals: Infographics and Summaries",
+                    "Data Science: Essential Readings and Articles"
+                ]
+            },
+            "Resource-Based": {
+                "Moderate Engagement": [
+                    "Machine Learning: Comprehensive eBooks and Guides",
+                    "AI Applications: Case Study Compilations",
+                    "Data Science: In-Depth Articles and White Papers",
+                    "AI Concepts: Research Articles and Detailed Guides"
+                ],
+                "High Engagement": [
+                    "Advanced AI: Research Papers and Technical Reports",
+                    "Deep Learning: Comprehensive Textbooks and Resource Repositories",
+                    "Machine Learning Mastery: Advanced Documentation and APIs",
+                    "AI Ethics: Government and Institutional Reports"
+                ],
+                "Low Engagement": [
+                    "AI Basics: Curated Reading Lists",
+                    "Introduction to Machine Learning: Beginner-Friendly Blogs",
+                    "Data Science Overview: Quick Reference Guides",
+                    "AI Fundamentals: Online Documentation"
+                ]
+            }
+        };
+
+        // Generate traces for each step
+        function generateStepTraces(step) {
+            const nodes = [];
+            const links = [];
+            let nodeId = 0;
+
+            function addNode(name, parent = null) {
+                nodes.push({ id: nodeId, label: name });
+                if (parent !== null) {
+                    links.push({ source: parent, target: nodeId });
+                }
+                return nodeId++;
+            }
+
+            function traverseHierarchy(hierarchy, parent = null, currentStep = 1) {
+                if (currentStep > step) return;
+
+                for (const key in hierarchy) {
+                    const currentNode = addNode(key, parent);
+                    if (Array.isArray(hierarchy[key])) {
+                        if (currentStep < step) {
+                            hierarchy[key].forEach((leaf) => addNode(leaf, currentNode));
+                        }
+                    } else {
+                        traverseHierarchy(hierarchy[key], currentNode, currentStep + 1);
+                    }
+                }
+            }
+
+            traverseHierarchy(hierarchy);
+            return { nodes, links };
+        }
+
+        function plotStep(step) {
+            const { nodes, links } = generateStepTraces(step);
+
+            // Create Plotly trace
+            const data = [{
+                type: 'sankey',
+                orientation: 'h',
+                node: {
+                    pad: 15,
+                    thickness: 20,
+                    line: {
+                        color: 'black',
+                        width: 0.5
+                    },
+                    label: nodes.map((node) => node.label),
+                    color: '#007bff'
+                },
+                link: {
+                    source: links.map((link) => link.source),
+                    target: links.map((link) => link.target),
+                    value: Array(links.length).fill(1)
+                }
+            }];
+
+            const layout = {
+                title: `Dendrogram - Step ${step}`,
+                font: {
+                    size: 12
+                },
+                hovermode: 'closest'
+            };
+
+            // Render the plot
+            Plotly.newPlot('dendrogram', data, layout);
+        }
+
+        // Initial plot for Step 1
+        plotStep(1);
+
+        // Add navigation buttons
+        const stepButtons = document.createElement('div');
+        stepButtons.style.textAlign = 'center';
+        stepButtons.style.marginTop = '20px';
+        document.body.appendChild(stepButtons);
+
+        for (let i = 1; i <= 3; i++) {
+            const button = document.createElement('button');
+            button.textContent = `Step ${i}`;
+            button.style.margin = '5px';
+            button.onclick = () => plotStep(i);
+            stepButtons.appendChild(button);
+        }
+    </script>
+</body>
+</html>

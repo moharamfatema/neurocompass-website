@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proper Heatmap: Students in Courses</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix"></script>
+    <style>
+        canvas {
+            max-width: 800px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Heatmap: Students in Courses</h1>
+    <canvas id="heatmapCanvas"></canvas>
+
+    <script>
+        // Heatmap data
+        const courses = [
+            "Interactive AI Basics",
+            "Applied AI",
+            "Introduction to Machine Learning",
+            "AI Ethics",
+            "Machine Learning Fundamentals",
+        ];
+
+        const engagementLevels = ["Low", "Moderate", "High"];
+
+        const values = [
+            { x: 0, y: 0, v: 12 },
+            { x: 1, y: 0, v: 34 },
+            { x: 2, y: 0, v: 45 },
+            { x: 0, y: 1, v: 20 },
+            { x: 1, y: 1, v: 25 },
+            { x: 2, y: 1, v: 50 },
+            { x: 0, y: 2, v: 8 },
+            { x: 1, y: 2, v: 30 },
+            { x: 2, y: 2, v: 35 },
+            { x: 0, y: 3, v: 25 },
+            { x: 1, y: 3, v: 15 },
+            { x: 2, y: 3, v: 10 },
+            { x: 0, y: 4, v: 20 },
+            { x: 1, y: 4, v: 30 },
+            { x: 2, y: 4, v: 25 },
+        ];
+
+        // Heatmap Configuration
+        const heatmapConfig = {
+            type: 'matrix',
+            data: {
+                datasets: [{
+                    label: 'Students in Courses',
+                    data: values,
+                    backgroundColor: (ctx) => {
+                        const value = ctx.dataset.data[ctx.dataIndex].v;
+                        return value > 40 ? '#ff6347' :
+                               value > 20 ? '#ffa500' : '#90ee90';
+                    },
+                    borderWidth: 1,
+                    borderColor: '#fff',
+                    width: ({ chart }) => (chart.chartArea || {}).width / 3 - 10,
+                    height: ({ chart }) => (chart.chartArea || {}).height / 5 - 10,
+                }],
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            title: (ctx) => `Course: ${courses[ctx[0].raw.y]}`,
+                            label: (ctx) => `Engagement: ${engagementLevels[ctx.raw.x]}, Students: ${ctx.raw.v}`,
+                        },
+                    },
+                    title: {
+                        display: true,
+                        text: 'Heatmap of Students Across Courses and Engagement Levels',
+                    },
+                },
+                scales: {
+                    x: {
+                        type: 'category',
+                        labels: engagementLevels,
+                        title: {
+                            display: true,
+                            text: 'Engagement Levels',
+                        },
+                    },
+                    y: {
+                        type: 'category',
+                        labels: courses,
+                        title: {
+                            display: true,
+                            text: 'Courses',
+                        },
+                    },
+                },
+            },
+        };
+
+        new Chart(document.getElementById('heatmapCanvas'), heatmapConfig);
+    </script>
+</body>
+</html>

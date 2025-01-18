@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consistent Label Placement Pie Chart</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div id="pieChart" style="width: 80%; height: 500px; margin: auto;"></div>
+    <script>
+        // Data for the pie chart
+        const regions = [
+            "South Region", "Scotland", "East Anglian Region", 
+            "South West Region", "London Region", "North Western Region",
+            "West Midlands Region", "East Midlands Region", "Wales",
+            "South East Region", "Yorkshire Region", "North Region", "Ireland"
+        ];
+        const studentCounts = [
+            115, 109, 101, 93, 92, 75, 72, 68, 64, 62, 57, 56, 36
+        ];
+
+        // Create the pie chart
+        const data = [{
+            values: studentCounts,
+            labels: regions,
+            type: 'pie',
+            textinfo: 'label+percent', // Display both labels and percentages
+            textposition: 'outside', // Ensure labels are placed outside the pie slices
+            hoverinfo: 'label+value+percent', // Hover info shows label, value, and percentage
+            automargin: true // Automatically adjust margins for better fit
+        }];
+
+        const layout = {
+            title: 'Distribution of Students by Region',
+            showlegend: true,
+            margin: { t: 50, l: 50, r: 50, b: 50 }
+        };
+
+        // Render the chart
+        Plotly.newPlot('pieChart', data, layout);
+    </script>
+</body>
+</html>

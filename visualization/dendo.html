@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Dendrogram: Course Clustering</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        .link {
+            fill: none;
+            stroke: #ccc;
+            stroke-width: 2px;
+        }
+
+        .node circle {
+            fill: #69b3a2;
+            stroke: #fff;
+            stroke-width: 1.5px;
+            cursor: pointer;
+        }
+
+        .node circle:hover {
+            fill: #ff6347;
+        }
+
+        .node text {
+            font-size: 12px;
+            font-family: sans-serif;
+            pointer-events: none;
+        }
+
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            pointer-events: none;
+            font-size: 12px;
+            font-family: sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Interactive Dendrogram: Course Clustering</h1>
+    <div id="tooltip" class="tooltip" style="display: none;"></div>
+    <svg id="dendrogram" width="960" height="600"></svg>
+
+    <script>
+        // Hierarchical data for the dendrogram
+        const data = {
+            name: "Courses",
+            children: [
+                {
+                    name: "Collaborative",
+                    children: [
+                        { name: "Interactive AI Basics", value: 80 },
+                        { name: "Applied AI", value: 70 },
+                        { name: "Introduction to Machine Learning", value: 50 },
+                    ],
+                },
+                {
+                    name: "Offline Content",
+                    children: [
+                        { name: "AI Principles", value: 85 },
+                        { name: "Machine Learning Fundamentals", value: 60 },
+                    ],
+                },
+                {
+                    name: "Interactive",
+                    children: [
+                        { name: "Machine Learning: Coding Exercises", value: 95 },
+                        { name: "AI Applications: Case Studies", value: 65 },
+                    ],
+                },
+            ],
+        };
+
+        const width = 960;
+        const height = 600;
+
+        // SVG Canvas
+        const svg = d3
+            .select("#dendrogram")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate(40,0)");
+
+        const tree = d3.tree().size([height, width - 160]);
+        const root = d3.hierarchy(data);
+
+        tree(root);
+
+        // Tooltip
+        const tooltip = d3.select("#tooltip");
+
+        // Links (paths connecting nodes)
+        const link = svg
+            .selectAll(".link")
+            .data(root.links())
+            .enter()
+            .append("path")
+            .attr("class", "link")
+            .attr(
+                "d",
+                d3
+                    .linkHorizontal()
+                    .x((d) => d.y)
+                    .y((d) => d.x)
+            );
+
+        // Nodes (circles and text labels)
+        const node = svg
+            .selectAll(".node")
+            .data(root.descendants())
+            .enter()
+            .append("g")
+            .attr("class", "node")
+            .attr("transform", (d) => `translate(${d.y},${d.x})`)
+            .on("mouseover", (event, d) => {
+                tooltip
+                    .style("left", `${event.pageX + 10}px`)
+                    .style("top", `${event.pageY + 10}px`)
+                    .style("display", "block")
+                    .html(
+                        `<strong>${d.data.name}</strong>${
+                            d.data.value ? `<br>Value: ${d.data.value}` : ""
+                        }`
+                    );
+            })
+            .on("mouseout", () => {
+                tooltip.style("display", "none");
+            })
+            .on("click", (event, d) => {
+                // Highlight the clicked node
+                svg.selectAll("circle").style("fill", "#69b3a2");
+                d3.select(event.currentTarget)
+                    .select("circle")
+                    .style("fill", "#ff6347");
+
+                tooltip
+                    .style("left", `${event.pageX + 10}px`)
+                    .style("top", `${event.pageY + 10}px`)
+                    .style("display", "block")
+                    .html(
+                        `<strong>${d.data.name}</strong>${
+                            d.data.value ? `<br>Value: ${d.data.value}` : ""
+                        }`
+                    );
+            });
+
+        // Circles representing nodes
+        node.append("circle").attr("r", 5);
+
+        // Labels for each node
+        node
+            .append("text")
+            .attr("dy", 3)
+            .attr("x", (d) => (d.children ? -8 : 8))
+            .style("text-anchor", (d) => (d.children ? "end" : "start"))
+            .text((d) => d.data.name);
+    </script>
+</body>
+</html>

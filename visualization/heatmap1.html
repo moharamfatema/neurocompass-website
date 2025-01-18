@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Heatmap for All Regions</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div id="heatmap" style="width: 80%; height: 500px; margin: auto;"></div>
+    <script>
+        // Regions and their student counts
+        const regions = [
+            "South Region", "Scotland", "East Anglian Region", 
+            "South West Region", "London Region", "North Western Region",
+            "West Midlands Region", "East Midlands Region", "Wales",
+            "South East Region", "Yorkshire Region", "North Region", "Ireland"
+        ];
+        const studentCounts = [
+            115, 109, 101, 93, 92, 75, 72, 68, 64, 62, 57, 56, 36
+        ];
+
+        // Heatmap Data: Create a 2D matrix where each row corresponds to a region
+        const data = [{
+            z: [studentCounts], // Student counts as a single-row matrix
+            x: ["Student Count"], // Metric column
+            y: regions, // All regions as rows
+            type: 'heatmap',
+            colorscale: 'Viridis', // Choose a color scale (e.g., Viridis, Plasma, Hot)
+            hoverongaps: false,
+            hoverinfo: 'x+y+z' // Hover shows metric, region, and value
+        }];
+
+        // Heatmap Layout
+        const layout = {
+            title: 'Heatmap: Distribution of Students by Region',
+            xaxis: { title: 'Metric' },
+            yaxis: { title: 'Region', automargin: true }, // Adjust margins for long labels
+            margin: { l: 150, r: 50, t: 50, b: 50 }, // Add space for readability
+        };
+
+        // Render the heatmap
+        Plotly.newPlot('heatmap', data, layout);
+    </script>
+</body>
+</html>

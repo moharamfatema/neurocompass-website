@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Chart Selector</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div style="text-align: center; margin-bottom: 20px;">
+        <label for="chartType">Select Chart Type: </label>
+        <select id="chartType" onchange="updateChart()">
+            <option value="bar">Bar Chart</option>
+            <option value="histogram">Histogram</option>
+        </select>
+    </div>
+    <div id="chartContainer" style="width: 80%; height: 500px; margin: auto;"></div>
+
+    <script>
+        // Data for Bar Chart
+        const barChartData = [{
+            x: ['A Level or Equivalent', 'Lower Than A Level', 'HE Qualification'],
+            y: [460, 359, 181],
+            type: 'bar',
+            marker: {
+                color: ['skyblue', 'orange', 'green']
+            },
+            text: [460, 359, 181].map(String),
+            textposition: 'auto',
+        }];
+        const barChartLayout = {
+            title: 'Number of Records by Education Type',
+            xaxis: { title: 'Education Type' },
+            yaxis: { title: 'Number of Records' },
+            margin: { t: 50, l: 50, r: 50, b: 50 },
+        };
+
+        // Data for Histogram
+        const histogramData = [{
+            x: [
+                0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 
+                50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100
+            ],
+            y: [
+                9, 0, 2, 5, 3, 5, 5, 10, 18, 21, 28, 60, 59, 83, 104, 129, 110, 129, 88, 132
+            ],
+            type: 'bar',
+            marker: {
+                color: 'rgba(255, 165, 0, 0.7)', // Orange color
+                line: {
+                    color: 'rgba(255, 165, 0, 1.0)', // Darker border color
+                    width: 1
+                }
+            }
+        }];
+        const histogramLayout = {
+            title: 'Distribution of Scores',
+            xaxis: {
+                title: 'Score',
+                tickangle: 0
+            },
+            yaxis: {
+                title: 'Frequency'
+            },
+            bargap: 0.1
+        };
+
+        // Render default chart (Bar Chart)
+        function renderBarChart() {
+            Plotly.newPlot('chartContainer', barChartData, barChartLayout);
+        }
+
+        // Render Histogram
+        function renderHistogram() {
+            Plotly.newPlot('chartContainer', histogramData, histogramLayout);
+        }
+
+        // Update Chart based on Dropdown Selection
+        function updateChart() {
+            const chartType = document.getElementById('chartType').value;
+            if (chartType === 'bar') {
+                renderBarChart();
+            } else if (chartType === 'histogram') {
+                renderHistogram();
+            }
+        }
+
+        // Render initial chart
+        renderBarChart();
+    </script>
+</body>
+</html>

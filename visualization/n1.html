@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stacked Bar Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Stacked Bar Chart: Course Recommendations</h1>
+    <canvas id="stackedBarChart"></canvas>
+
+    <script>
+        // Data for the stacked bar chart
+        const labels = ["Collaborative", "Offline Content", "Interactive", "Informational", "Resource-Based"];
+        const highEngagement = [4, 4, 4, 4, 4]; // High Engagement courses
+        const moderateEngagement = [4, 4, 4, 4, 4]; // Moderate Engagement courses
+        const lowEngagement = [4, 4, 4, 4, 4]; // Low Engagement courses
+
+        // Stacked Bar Chart Configuration
+        new Chart(document.getElementById('stackedBarChart'), {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'High Engagement',
+                        data: highEngagement,
+                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Moderate Engagement',
+                        data: moderateEngagement,
+                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Low Engagement',
+                        data: lowEngagement,
+                        backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Stacked Bar Chart: Engagement Levels'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: (context) => `Courses: ${context.raw}`
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        stacked: true,
+                    },
+                    y: {
+                        beginAtZero: true,
+                        stacked: true,
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
