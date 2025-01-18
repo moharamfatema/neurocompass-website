@@ -55,7 +55,8 @@ This will start the React development server on `http://localhost:5173`. You can
 - [React Router Documentation][react-router]
 - [Vite Guides][vite]
 - [UV Documentation][uv]
-- [D3.js Documentation][d3JS]
+- [PlotlyJS Documentation][plotlyJS]
+- [Shadcn Documentation][shadcn]
 
 <!-- References -->
 [fastapi]: https://fastapi.tiangolo.com/tutorial/
@@ -63,4 +64,7 @@ This will start the React development server on `http://localhost:5173`. You can
 [react-router]: https://reactrouter.com/start/library/installation
 [vite]: https://vitejs.dev/guide/
 [uv]: https://docs.astral.sh/uv/
-[d3JS]: https://d3js.org/getting-started
+[plotly]: https://plotly.com/python/
+[plotlyJS]: https://plotly.com/javascript/react/
+[shadcn]: https://ui.shadcn.com/docs
+```
