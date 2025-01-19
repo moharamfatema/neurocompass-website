@@ -1,6 +1,7 @@
 import joblib
 
 from fastapi import HTTPException
+import pandas as pd
 
 from config.settings import settings
 from config.logger import logger
@@ -18,8 +19,12 @@ class ML:
             raise HTTPException(status_code=404, detail=f"Student ID {student_id} not found")
 
         logger.info(f"Student {student_id} found, {student}")
+        student.pop("_id")
+        pd_student = pd.DataFrame([student])
+
         try:
-            prediction = self.model.predict(student)
+            prediction = self.model.predict(pd_student)
+            logger.info(f"Prediction successful: {prediction}")
             recommended_courses = prediction[0]["courses"]
             recommended_resources = prediction[0]["resources"]
             
