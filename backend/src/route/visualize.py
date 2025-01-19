@@ -6,4 +6,4 @@ router = APIRouter(prefix="/api", tags=["visualize"])
 
 @router.get("/visualize")
 def initialize_visualization():
-    raise NotImplementedError("Visualization not implemented yet")
+    return HTTPException(status_code=501, detail="Visualization not implemented yet")
