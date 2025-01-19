@@ -4,3 +4,6 @@ joblib
 pandas
 scikit-learn
 pymongo
+pydantic<2.0.0
+pydantic[dotenv]
+loguru

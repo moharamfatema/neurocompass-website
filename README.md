@@ -48,6 +48,17 @@ npm run dev
 
 This will start the React development server on `http://localhost:5173`. You can now navigate to `http://localhost:5173` in your browser to view the web application.
 
+## Initializing the Database
+
+After adding the files `merged_df.csv` and `processed_data.csv` to the `backend/assets/data` directory, you can initialize the database by running the python script in the `backend/Scripts` directory:
+
+```bash
+cd backend
+python3 Scripts/import_csv.py
+```
+
+You only need to run this script once to initialize the database. (It takes a while to run)
+
 ## Resources
 
 - [FastAPI Guides][fastapi]
@@ -58,6 +69,13 @@ This will start the React development server on `http://localhost:5173`. You can
 - [PlotlyJS Documentation][plotlyJS]
 - [Shadcn Documentation][shadcn]
 
+
+## Common issues and solutions
+
+### Connection refused to mongodb
+
+If you are running the mongoDB server on windows, and running the backend on WSL, you may encounter a connection refused error. To fix this, you need to change the `bindIp` in the `mongod.conf` file to `0.0.0.0`. [See this article][article1]
+
 <!-- References -->
 [fastapi]: https://fastapi.tiangolo.com/tutorial/
 [react]: https://reactjs.org/docs/getting-started.html
@@ -67,4 +85,5 @@ This will start the React development server on `http://localhost:5173`. You can
 [plotly]: https://plotly.com/python/
 [plotlyJS]: https://plotly.com/javascript/react/
 [shadcn]: https://ui.shadcn.com/docs
-```
+
+[article1]:[https://medium.com/@uncledev/how-to-connect-a-project-running-wsl-to-mongodb-running-on-windows-609bb7a6e1e8]
