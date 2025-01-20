@@ -7,6 +7,7 @@ class Settings(BaseSettings):
     DB_NAME: str = 'neurocompass'
     DB_COLLECTION_X_y: str = 'X-y-dataset'
     DB_COLLECTION_MERGED: str = 'merged-dataset'
+    DB_COLLECTION_CACHE: str = 'cache'
     # src/assets/model/model.pkl
     MODEL_PATH: str = str(Path(__file__).resolve().parents[2] / 'assets' / 'models' / 'SVC.pkl')
 

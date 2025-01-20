@@ -7,6 +7,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from route.predict import router as predict_router
+from route.visualize import router as visualize_router
+
 app = FastAPI()
 
 # CORS allow local vite on port 5173
@@ -28,6 +30,7 @@ def health_check():
 
 # mount routers
 app.include_router(predict_router, tags=["predict"])
+app.include_router(visualize_router, tags=["visualize"])
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="localhost", port=8000, reload=True)
