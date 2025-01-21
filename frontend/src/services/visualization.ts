@@ -12,6 +12,18 @@ export interface Filter {
     values: string[] | ValuesNumeric;
 }
 
+export interface FilterCategorical{
+    field: string;
+    type: "categorical";
+    values: string[];
+}
+
+export interface FilterNumerical{
+    field: string;
+    type: "numerical";
+    values: ValuesNumeric;
+}
+
 // Function to fetch visualization filters
 const fetchVisualizationFilters: () => Promise<Filter[]> = async () => {
     try {

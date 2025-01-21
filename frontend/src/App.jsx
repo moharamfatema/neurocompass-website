@@ -4,6 +4,7 @@ import { QueryClientProvider } from '@tanstack/react-query';
 
 import { ThemeProvider } from "@/components/theme-provider"
 import { queryClient } from './services/utils';
+import { StoreProvider } from '@/store/root';
 
 import PublicLayout from './layouts/PublicLayout';
 import Home from './pages/Home';
@@ -14,15 +15,17 @@ function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <QueryClientProvider client={queryClient}>
-        <Router>
-          <Routes>
-            <Route path="/" element={<PublicLayout />}>
-              <Route index element={<Home />} />
-              <Route path="/visualization" element={<Visualization />} />
-              <Route path="/prediction" element={<Prediction />} />
-            </Route>
-          </Routes>
-        </Router>
+        <StoreProvider>
+          <Router>
+            <Routes>
+              <Route path="/" element={<PublicLayout />}>
+                <Route index element={<Home />} />
+                <Route path="/visualization" element={<Visualization />} />
+                <Route path="/prediction" element={<Prediction />} />
+              </Route>
+            </Routes>
+          </Router>
+        </StoreProvider>
       </QueryClientProvider>
     </ThemeProvider>
   )
