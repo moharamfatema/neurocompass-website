@@ -1,6 +1,5 @@
 # src/main.py
-import os
-import joblib
+from pathlib import Path
 import uvicorn
 import pandas as pd
 from fastapi import FastAPI
@@ -32,5 +31,7 @@ def health_check():
 app.include_router(predict_router, tags=["predict"])
 app.include_router(visualize_router, tags=["visualize"])
 
+main_dir = Path(__file__).resolve().parent
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="localhost", port=8000, reload=True)
+    uvicorn.run("main:app", host="localhost", port=8000,
+                reload=True, reload_dirs=[main_dir])

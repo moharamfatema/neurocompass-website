@@ -35,6 +35,20 @@ const fetchVisualizationFilters: () => Promise<Filter[]> = async () => {
     }
 };
 
+const fetchVisualizationDataSummary = async (filters: Filter[]) => {
+    try {
+        const response = await axiosInstance.get("/visualize/data-summary", {
+            params: {
+                filters: JSON.stringify(filters),
+            },
+        });
+        return response.data;
+    } catch (error) {
+        console.error("fetchVisualizationDataSummary -> error", error);
+        throw new Error("Error fetching visualization data summary");
+    }
+}
+
 // Custom hook to use visualization filters
 export const useVisualizationFilters = () => {
     return useQuery({
@@ -42,3 +56,11 @@ export const useVisualizationFilters = () => {
         queryFn: fetchVisualizationFilters,
     });
 };
+
+
+export const useDataSummary = ({ filters }:any) => {
+    return useQuery({
+        queryKey: ["dataSummary", filters],
+        queryFn: () => fetchVisualizationDataSummary(filters),
+    });
+}

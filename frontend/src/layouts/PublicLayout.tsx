@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 
 import {
     NavigationMenu,
@@ -40,7 +40,16 @@ const NavigationMenuLinkWithIcon = ({
     );
 };
 
+const navLinks = [
+    { to: "/", label: "Home", icon: HomeIcon },
+    { to: "/visualization", label: "Visualization", icon: ChartBarIcon },
+    { to: "/prediction", label: "Prediction", icon: BrainIcon },
+];
+
 const PublicLayout = () => {
+    const { pathname } = useLocation();
+    const activeLink = navLinks.find((link) => link.to === pathname);
+
     return (
         <React.Fragment>
             <header className="sticky top-0 z-10 bg-opacity-60 backdrop-blur-md bg-black flex items-center justify-between p-4 gap-4">
@@ -52,36 +61,19 @@ const PublicLayout = () => {
                                 Neurocompass
                             </TypographyH2>
                         </NavigationMenuItemWithIcon>
-                        <NavigationMenuItem>
-                            <NavLink to={"/"}>
-                                <NavigationMenuLinkWithIcon
-                                    className={navigationMenuTriggerStyle()}
-                                >
-                                    <HomeIcon className="w-6 h-6" />
-                                    Home
-                                </NavigationMenuLinkWithIcon>
-                            </NavLink>
-                        </NavigationMenuItem>
-                        <NavigationMenuItem>
-                            <NavLink to={"/visualization"}>
-                                <NavigationMenuLinkWithIcon
-                                    className={navigationMenuTriggerStyle()}
-                                >
-                                    <ChartBarIcon className="w-6 h-6" />
-                                    Visualization
-                                </NavigationMenuLinkWithIcon>
-                            </NavLink>
-                        </NavigationMenuItem>
-                        <NavigationMenuItem>
-                            <NavLink to={"/prediction"}>
-                                <NavigationMenuLinkWithIcon
-                                    className={navigationMenuTriggerStyle()}
-                                >
-                                    <BrainIcon className="w-6 h-6" />
-                                    Prediction
-                                </NavigationMenuLinkWithIcon>
-                            </NavLink>
-                        </NavigationMenuItem>
+                        {navLinks.map((link) => (
+                            <NavigationMenuItem key={link.to}>
+                                <NavLink to={link.to}>
+                                    <NavigationMenuLinkWithIcon
+                                        className={navigationMenuTriggerStyle()}
+                                        active={activeLink?.to === link.to}
+                                    >
+                                        <link.icon className="w-6 h-6" />
+                                        {link.label}
+                                    </NavigationMenuLinkWithIcon>
+                                </NavLink>
+                            </NavigationMenuItem>
+                        ))}
                     </NavigationMenuList>
                 </NavigationMenu>
                 <ModeToggle />

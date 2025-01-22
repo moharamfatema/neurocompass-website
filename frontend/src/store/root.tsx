@@ -45,6 +45,23 @@ const reducer = (state: State, action: Action): State => {
     }
 };
 
+export const getFiltersQueryFromSelectedValues = (state: State) => {
+    const selectedValues = state.selectedValues;
+    const filters = state.filters;
+    const query = [];
+    filters.forEach((filter) => {
+        if (selectedValues[filter.field]) {
+            query.push({
+                field: filter.field,
+                type: filter.type,
+                values: selectedValues[filter.field],
+            });
+        }
+    });
+    console.debug("getFiltersQueryFromSelectedValues -> query", query);
+    return query;
+};
+
 // Create the provider
 const StoreProvider : React.FC<{ children: ReactNode }> = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState);

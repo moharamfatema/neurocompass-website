@@ -13,7 +13,7 @@ import { StoreContext } from "@/store/root";
 const filtersSkeleton = () => (
     <div className="grid p-4 grid-cols-1 gap-4 w-full border-r border-zinc-500 overflow-y-auto h-[600px] overflow-x-hidden">
         {Array.from({ length: 4 }).map((_, index) => (
-            <React.Fragment>
+            <React.Fragment key={index}>
                 <Skeleton key={`${index}.label`} className="w-2/3 h-8" />
                 <Skeleton key={index} className="w-full h-20" />
             </React.Fragment>
