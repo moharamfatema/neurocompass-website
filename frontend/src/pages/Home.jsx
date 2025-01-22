@@ -5,12 +5,8 @@ import image1 from '../assets/vis_1.avif';
 import image2 from '../assets/recommender_1.avif';  
 
 const Home = () => (
-    <div style={{ fontFamily: "Arial, sans-serif", padding: "80px" }}>
-        <header>
-            <h1 style={{ fontSize: "4rem", fontWeight: "bold", marginBottom: "50px" }}>Neurocompass</h1>
-        </header>
-
-        <div style={{ display: "flex", justifyContent: "space-between", marginTop: "50px", gap: "30px", flexWrap: "wrap" }}>
+    <div style={{ fontFamily: "Arial, sans-serif", padding: "20px" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", gap: "30px", flexWrap: "wrap" }}>
             {/* Image block 1: Visualization */}
             <Link to={"/visualization"} style={{ width: "48%", textDecoration: "none" }}>
                 <div style={{ position: "relative", width: "100%", paddingBottom: "50%", backgroundColor: "#ccc", borderRadius: "12px", overflow: "hidden" }}>

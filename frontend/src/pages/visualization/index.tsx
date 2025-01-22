@@ -4,8 +4,8 @@ import DataSummary from "./components/DataSummary";
 
 const Visualization = () => {
     return (
-        <div className=" flex flex-col items-center justify-center gap-2 m-5">
-            <section className="flex w-full rounded-lg bg-zinc-900">
+        <div className=" flex flex-col items-center justify-center gap-2 m-5 max-h-full">
+            <section className="flex w-full rounded-lg bg-zinc-900 h-full">
                 <aside className="min-w-72 w-1/4 h-full">
                     <Filters />
                 </aside>
