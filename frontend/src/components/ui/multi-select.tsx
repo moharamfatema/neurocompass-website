@@ -39,11 +39,11 @@ const multiSelectVariants = cva(
         variants: {
             variant: {
                 default:
-                    "border-foreground/10 text-foreground bg-card hover:bg-card/80",
+                    "dark:border-foreground/10 dark:text-foreground dark:bg-card dark:hover:bg-card/80",
                 secondary:
-                    "border-foreground/10 bg-secondary text-secondary-foreground hover:bg-secondary/80",
+                    "border-foreground/10 dark:bg-secondary dark:text-secondary-foreground hover:bg-secondary/80",
                 destructive:
-                    "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
+                    "border-transparent dark:bg-destructive dark:text-destructive-foreground hover:bg-destructive/80",
                 inverted: "inverted",
             },
         },
@@ -251,7 +251,7 @@ export const MultiSelect = React.forwardRef<
                                     {selectedValues.length > maxCount && (
                                         <Badge
                                             className={cn(
-                                                "bg-transparent text-foreground border-foreground/1 hover:bg-transparent",
+                                                "dark:bg-transparent dark:text-foreground dark:border-foreground/1 dark:hover:bg-transparent",
                                                 isAnimating
                                                     ? "animate-bounce"
                                                     : "",
