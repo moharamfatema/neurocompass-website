@@ -9,7 +9,7 @@ import { StoreProvider } from '@/store/root';
 import PublicLayout from './layouts/PublicLayout';
 import Home from './pages/Home';
 import Visualization from './pages/visualization';
-import Prediction from './pages/Prediction';
+import Prediction from './pages/prediction';
 
 function App() {
   return (
