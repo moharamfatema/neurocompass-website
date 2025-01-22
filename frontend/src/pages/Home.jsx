@@ -62,20 +62,6 @@ const Home = () => (
                 </p>
             </section>
         </div>
-
-        <footer style={{
-            position: "fixed",
-            bottom: "0",
-            left: "0",
-            width: "100%",
-            display: "flex",
-            justifyContent: "space-between",
-            padding: "10px 20px"
-        }}>
-            <p style={{ marginLeft: "10px" }}>Neurobooster 2024-2025</p>
-            <p style={{ marginRight: "10px" }}>Learning Analytics @UDE</p>
-        </footer>
-
     </div>
 );
 

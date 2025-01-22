@@ -81,6 +81,21 @@ const PublicLayout = () => {
             <main>
                 <Outlet />
             </main>
+            <footer
+                style={{
+                    position: "fixed",
+                    bottom: "0",
+                    left: "0",
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    padding: "5px 20px",
+                }}
+                className=" bg-opacity-20 backdrop-blur-md bg-black text-xs"
+            >
+                <p style={{ marginLeft: "10px" }}>Neurobooster 2024-2025</p>
+                <p style={{ marginRight: "10px" }}>Learning Analytics @UDE</p>
+            </footer>
         </React.Fragment>
     );
 };
