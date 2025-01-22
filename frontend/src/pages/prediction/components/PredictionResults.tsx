@@ -34,29 +34,70 @@ const PredictionCards: React.FC<{ prediction: PredictionResult }> = ({
     prediction,
 }) => {
     const { student, learning_path } = prediction;
+    const cardData = [
+        {
+            title: "Engagement Level",
+            content: learning_path.engagement,
+            description: "Indicates the student's current level of participation."
+        },
+        {
+            title: "Preferred Study Method",
+            content: learning_path.study_method,
+            description: "The recommended study approach based on learning habits."
+        },
+        {
+            title: "Recommended Courses",
+            content: learning_path.recommendations,
+            description: "Personalized course recommendations based on the student's unique learning needs."
+        }
+    ];
+
     return (
-        <div className="grid gap-4 grid-cols-1">
-            <h5 className="text-base font-semibold text-left">
-                Recommended Learning Path
-            </h5>
-            <div className="grid grid-cols-3 gap-4">
-                <Card className="bg-zinc-900 rounded-lg p-4 text-sm">
-                    {learning_path.engagement}
-                </Card>
-                <Card className="bg-zinc-900 rounded-lg p-4 text-sm">
-                    {learning_path.study_method}
-                </Card>
-                <Card className="bg-zinc-900 rounded-lg p-4 text-sm ">
-                    {learning_path.recommendations}
+        <div className="grid grid-cols-3 gap-4">
+            {/* 2 blocks on the left */}
+            <div className="grid grid-rows-2 gap-4 col-span-1">
+                {cardData.slice(0, 2).map((card, index) => (
+                    <Card 
+                        key={index} 
+                        className="bg-zinc-900 rounded-lg p-4 text-sm flex flex-col justify-between h-full"
+                    >
+                        <div>
+                            <h3 className="text-white font-semibold mb-2">{card.title}</h3>
+                            <p className="text-lg ">{card.content}</p>
+                        </div>
+                        
+                        <p className="text-gray-400 mt-4 text-xs border-t border-zinc-700 pt-2">
+                            {card.description}
+                        </p>
+                    </Card>
+                ))}
+            </div>
+
+            {/* 1 block on the right */}
+            <div className="col-span-2 flex flex-col">
+                <Card 
+                    className="bg-zinc-900 rounded-lg p-4 text-sm flex flex-col justify-between h-full"
+                >
+                    <div>
+                        <h3 className="text-white font-semibold mb-2 ">{cardData[2].title}</h3>
+                        <p className="text-lg">{cardData[2].content}</p>
+                    </div>
+                    <p className="text-gray-400 mt-4 text-xs border-t border-zinc-700 pt-2">
+                        {cardData[2].description}
+                    </p>
                 </Card>
             </div>
-            <div className="grid gap-4">
-                <h5 className="text-base font-semibold text-left">
+
+            {/* Student details */}
+            <div className=" col-span-4 flex flex-col text-gray-400 text-xs">
+                <h5 className="text-basetext-left">
                     {" "}
-                    student details here
+                    student details here: 
                 </h5>
                 {JSON.stringify(student, null, 2)}
             </div>
+
+
         </div>
     );
 };
