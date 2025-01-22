@@ -5,11 +5,11 @@ class Settings(BaseSettings):
     DB_IP_ADDRESS: str = '127.0.0.1'
     DB_PORT: int = 27017
     DB_NAME: str = 'neurocompass'
-    DB_COLLECTION_X_y: str = 'X-y-dataset'
+    DB_COLLECTION_X_y: str = 'final-dataframe'
     DB_COLLECTION_MERGED: str = 'merged-dataset'
     DB_COLLECTION_CACHE: str = 'cache'
-    # src/assets/model/model.pkl
-    MODEL_PATH: str = str(Path(__file__).resolve().parents[2] / 'assets' / 'models' / 'SVC.pkl')
+    MODEL_PATH_SVC: str = str(Path(__file__).resolve().parents[2] / 'assets' / 'models' / 'SVCv1.6.pkl')
+    MODEL_PATH_GB: str = str(Path(__file__).resolve().parents[2] / 'assets' / 'models' / 'GBv1.6.pkl')
 
     class Config:
         env_file = '.env'

@@ -2,7 +2,7 @@ fastapi
 uvicorn
 joblib
 pandas
-scikit-learn
+scikit-learn==1.6.0
 pymongo
 pydantic<2.0.0
 pydantic[dotenv]
@@ -10,3 +10,4 @@ loguru
 ipython
 jupyter
 ipykernel
+xgboost

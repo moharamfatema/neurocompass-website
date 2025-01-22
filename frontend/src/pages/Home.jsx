@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PublicLayout from '../layouts/PublicLayout';
 
 import image1 from '../assets/vis_1.avif'; 
 import image2 from '../assets/recommender_1.avif';  
@@ -8,7 +7,7 @@ import image2 from '../assets/recommender_1.avif';
 const Home = () => (
     <div style={{ fontFamily: "Arial, sans-serif", padding: "80px" }}>
         <header>
-            <h1 style={{ fontSize: "4rem", fontWeight: "bold", marginBottom: "50px" }}>NeuroCompass</h1>
+            <h1 style={{ fontSize: "4rem", fontWeight: "bold", marginBottom: "50px" }}>Neurocompass</h1>
         </header>
 
         <div style={{ display: "flex", justifyContent: "space-between", marginTop: "50px", gap: "30px", flexWrap: "wrap" }}>
@@ -52,13 +51,13 @@ const Home = () => (
         <div style={{ marginTop: "50px", display: "flex", justifyContent: "space-between", gap: "30px", flexWrap: "wrap" }}>
             <section style={{ width: "48%" }}>
                 <p>
-                NeuroCompass provides clear data visualizations that help educators quickly identify student performance, learning trends, and potential factors influencing learning outcomes. With intuitive charts, real-time dashboards, and powerful filtering options, teachers can customize views to analyze specific groups or performance patterns. This allows them to easily track students' progress and uncover underlying feature distributions, enabling more informed teaching decisions.               
+                Neurocompass provides clear data visualizations that help educators quickly identify student performance, learning trends, and potential factors influencing learning outcomes. With intuitive charts, real-time dashboards, and powerful filtering options, teachers can customize views to analyze specific groups or performance patterns. This allows them to easily track students' progress and uncover underlying feature distributions, enabling more informed teaching decisions.               
                 </p>
             </section>
 
             <section style={{ width: "48%" }}>
                 <p>
-                NeuroCompass's personalized recommendation system provides students with tailored learning paths, ensuring they receive the most suitable resources. The system intelligently suggests courses and materials, helping students progress steadily, while also guiding educators to optimize their teaching content.
+                {"Neurocompass's personalized recommendation system provides students with tailored learning paths, ensuring they receive the most suitable resources. The system intelligently suggests courses and materials, helping students progress steadily, while also guiding educators to optimize their teaching content."}
                 </p>
             </section>
         </div>
