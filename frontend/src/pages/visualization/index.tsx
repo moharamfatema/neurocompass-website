@@ -49,18 +49,18 @@ const Charts: React.FC = () => {
 
 const Visualization = () => {
     return (
-        <div className=" flex flex-col items-center justify-center gap-2 m-5 max-h-full">
-            <section className="flex w-full rounded-lg bg-zinc-900 h-full">
+        <section className=" flex items-center justify-center gap-2 max-h-full w-full rounded-lg h-full">
+            {/* <section className="flex w-full rounded-lg bg-zinc-900 h-full"> */}
                 <aside className="min-w-72 w-1/4 h-full">
                     <Filters />
                 </aside>
-                <main className="flex flex-col w-full p-4 h-full max-h-[80dvh] overflow-y-auto gap-2">
+                <main className="flex flex-col w-full p-4 h-full max-h-[88dvh] overflow-y-auto gap-2">
                     {/* data summary cards */}
                     <DataSummary />
                     <Charts />
                 </main>
-            </section>
-        </div>
+            {/* </section> */}
+        </section>
     );
 };
 

@@ -49,7 +49,7 @@ const Filters = () => {
     return (
         filters &&
         filters.length && (
-            <div className="grid p-4 grid-cols-1 gap-4 w-full border-r border-zinc-500 overflow-y-auto max-h-[80dvh] overflow-x-hidden">
+            <div className="grid p-4 grid-cols-1 gap-4 w-full border-r border-zinc-500 overflow-y-auto max-h-[88dvh] overflow-x-hidden">
                 {filters.map((filter: Filter) => (
                     <React.Fragment key={filter.field}>
                         {filter.type === "categorical" && (

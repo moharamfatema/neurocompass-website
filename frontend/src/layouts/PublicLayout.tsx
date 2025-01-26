@@ -42,8 +42,8 @@ const NavigationMenuLinkWithIcon = ({
 
 const navLinks = [
     { to: "/", label: "Home", icon: HomeIcon },
-    { to: "/visualization", label: "Visualization", icon: ChartBarIcon },
-    { to: "/prediction", label: "Prediction", icon: BrainIcon },
+    { to: "/visualization", label: "Dashboard", icon: ChartBarIcon },
+    { to: "/prediction", label: "Recommender", icon: BrainIcon },
 ];
 
 const PublicLayout = () => {
