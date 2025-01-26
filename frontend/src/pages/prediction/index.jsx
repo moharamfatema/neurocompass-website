@@ -13,7 +13,8 @@ const Prediction = () => {
     return (
         <div className='p-4 w-3/4 m-auto gap-5 flex flex-col mt-10 text-center'>
             <div className="grid grid-cols-1 gap-2 w-1/2 m-auto">
-                <h5 className='text-sm'>Enter your Student ID to unlock your personalized lecture, materials, and activities</h5>
+                <h5 className='text-sm'>Enter your Student ID to unlock your personalized learning insights
+                </h5>
                 <input
                     type="text"
                     value={studentId}
