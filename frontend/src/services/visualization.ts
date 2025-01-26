@@ -33,7 +33,16 @@ export interface RegionCountResponse {
     is_cached: boolean;
 }
 
-// Function to fetch visualization filters
+export interface ScoresHistogram {
+    count: number;
+    score: number;
+}
+
+export interface ScoresHistogramResponse {
+    scores: ScoresHistogram[];
+    is_cached: boolean;
+}
+
 const fetchVisualizationFilters: () => Promise<Filter[]> = async () => {
     try {
         const response = await axiosInstance.get("/visualize/filters");
@@ -56,7 +65,7 @@ const fetchVisualizationDataSummary = async (filters: Filter[]) => {
         console.error("fetchVisualizationDataSummary -> error", error);
         throw new Error("Error fetching visualization data summary");
     }
-}
+};
 
 const fetchRegionCount = async (filters: Filter[]) => {
     try {
@@ -72,7 +81,23 @@ const fetchRegionCount = async (filters: Filter[]) => {
     }
 };
 
-// Custom hook to use visualization filters
+const fetchScoresHistogram = async (filters: Filter[]) => {
+    try {
+        const response = await axiosInstance.get(
+            "/visualize/scores-hist",
+            {
+                params: {
+                    filters: JSON.stringify(filters),
+                },
+            },
+        );
+        return response.data.scores;
+    } catch (error) {
+        console.error("fetchScoresHistogram -> error", error);
+        throw new Error("Error fetching scores histogram");
+    }
+};
+
 export const useVisualizationFilters = () => {
     return useQuery({
         queryKey: ["visualizationFilters"],
@@ -80,17 +105,23 @@ export const useVisualizationFilters = () => {
     });
 };
 
-
-export const useDataSummary = ({ filters }:any) => {
+export const useDataSummary = ({ filters }: any) => {
     return useQuery({
         queryKey: ["dataSummary", filters],
         queryFn: () => fetchVisualizationDataSummary(filters),
     });
-}
+};
 
-export const useRegionCount = ({ filters }:any) => {
+export const useRegionCount = ({ filters }: any) => {
     return useQuery({
         queryKey: ["regionCount", filters],
         queryFn: () => fetchRegionCount(filters),
     });
-}
+};
+
+export const useScoresHistogram = ({ filters }: any) => {
+    return useQuery({
+        queryKey: ["scoresHistogram", filters],
+        queryFn: () => fetchScoresHistogram(filters),
+    });
+};

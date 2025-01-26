@@ -17,12 +17,15 @@ def get_filters():
 
 @router.get("/data-summary", response_model=dict)
 def get_data_summary(filters="{}"):
-    logger.debug(f"Filters: {filters}")
     filters = json.loads(filters)
-    logger.debug(f"Filters decoded: {filters}")
     return visualization.get_data_summary(filters)
 
 @router.get("/regions-count", response_model=dict)
 def get_regions_count(filters="{}"):
     filters = json.loads(filters)
     return visualization.get_regions_count(filters)
+
+@router.get("/scores-hist", response_model=dict)
+def get_scores_hist(filters="{}"):
+    filters = json.loads(filters)
+    return visualization.get_scores_hist(filters)

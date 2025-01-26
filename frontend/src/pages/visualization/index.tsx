@@ -2,8 +2,9 @@ import React from "react";
 import Filters from "./components/filters";
 import DataSummary from "./components/DataSummary";
 import Regions from "./components/Charts/Regions";
+import Scores from "./components/Charts/Scores";
 
-const ChartTypes = ["regions"];
+const ChartTypes = ["regions","scores"];
 
 const ChartTypeTabs: React.FC<{
     selectedTab: number;
@@ -46,6 +47,7 @@ const Visualization = () => {
                     <div className="grow text-center align-middle border border-zinc-500 rounded-lg">
                         {/* visualization */}
                         {selectedTab === 0 && <Regions />}
+                        {selectedTab === 1 && <Scores />}
                     </div>
                 </main>
             </section>
