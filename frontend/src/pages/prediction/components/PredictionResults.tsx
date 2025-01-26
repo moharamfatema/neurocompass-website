@@ -57,16 +57,18 @@ const PredictionCards: React.FC<{ prediction: PredictionResult }> = ({
             {/* 2 blocks on the left */}
             <div className="grid grid-rows-2 gap-4 col-span-1">
                 {cardData.slice(0, 2).map((card, index) => (
-                    <Card 
-                        key={index} 
-                        className="bg-zinc-900 rounded-lg p-4 text-sm flex flex-col justify-between h-full"
+                    <Card
+                        key={index}
+                        className="bg-zinc-900 rounded-lg px-2 py-4 text-sm flex flex-col gap-5 justify-between h-full"
                     >
-                        <div>
-                            <h3 className="text-white font-semibold mb-2">{card.title}</h3>
-                            <p className="text-lg ">{card.content}</p>
-                        </div>
-                        
-                        <p className="text-gray-400 mt-4 text-xs border-t border-zinc-700 pt-2">
+                        <h3 className="text-xs text-white">
+                            {card.title}
+                        </h3>
+                        <p className="text-center px-2 text-xl font-extrabold">
+                            {card.content}
+                        </p>
+
+                        <p className="text-gray-400 text-xs border-t border-zinc-700 pt-2">
                             {card.description}
                         </p>
                     </Card>
@@ -75,13 +77,22 @@ const PredictionCards: React.FC<{ prediction: PredictionResult }> = ({
 
             {/* 1 block on the right */}
             <div className="col-span-2 flex flex-col">
-                <Card 
-                    className="bg-zinc-900 rounded-lg p-4 text-sm flex flex-col justify-between h-full"
-                >
-                    <div>
-                        <h3 className="text-white font-semibold mb-2 ">{cardData[2].title}</h3>
-                        <p className="text-lg">{cardData[2].content}</p>
-                    </div>
+                <Card className="bg-zinc-900 rounded-lg p-4 text-sm flex flex-col justify-between h-full">
+                        <h3 className="text-xs text-white ">
+                            {cardData[2].title}
+                        </h3>
+                        <p className="text-lg flex flex-col">
+                            {(cardData[2].content as string[]).map(
+                                (course, i) => (
+                                    <span
+                                        key={i}
+                                        className="h-full block border-b border-zinc-700 py-3 text-left hover:bg-zinc-800 px-2 text-sm font-semibold"
+                                    >
+                                        {course}
+                                    </span>
+                                ),
+                            )}
+                        </p>
                     <p className="text-gray-400 mt-4 text-xs border-t border-zinc-700 pt-2">
                         {cardData[2].description}
                     </p>
@@ -89,15 +100,13 @@ const PredictionCards: React.FC<{ prediction: PredictionResult }> = ({
             </div>
 
             {/* Student details */}
-            <div className=" col-span-4 flex flex-col text-gray-400 text-xs">
+            {/* <div className=" col-span-4 flex flex-col text-gray-400 text-xs">
                 <h5 className="text-basetext-left">
                     {" "}
                     student details here: 
                 </h5>
                 {JSON.stringify(student, null, 2)}
-            </div>
-
-
+            </div> */}
         </div>
     );
 };
