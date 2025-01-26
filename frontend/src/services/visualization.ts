@@ -24,6 +24,15 @@ export interface FilterNumerical{
     values: ValuesNumeric;
 }
 
+export interface RegionCount {
+    count: number;
+    region: string;
+}
+export interface RegionCountResponse {
+    regions: RegionCount[];
+    is_cached: boolean;
+}
+
 // Function to fetch visualization filters
 const fetchVisualizationFilters: () => Promise<Filter[]> = async () => {
     try {
@@ -49,6 +58,20 @@ const fetchVisualizationDataSummary = async (filters: Filter[]) => {
     }
 }
 
+const fetchRegionCount = async (filters: Filter[]) => {
+    try {
+        const response = await axiosInstance.get("/visualize/regions-count", {
+            params: {
+                filters: JSON.stringify(filters),
+            },
+        });
+        return response.data.regions;
+    } catch (error) {
+        console.error("fetchRegionCount -> error", error);
+        throw new Error("Error fetching region count");
+    }
+};
+
 // Custom hook to use visualization filters
 export const useVisualizationFilters = () => {
     return useQuery({
@@ -62,5 +85,12 @@ export const useDataSummary = ({ filters }:any) => {
     return useQuery({
         queryKey: ["dataSummary", filters],
         queryFn: () => fetchVisualizationDataSummary(filters),
+    });
+}
+
+export const useRegionCount = ({ filters }:any) => {
+    return useQuery({
+        queryKey: ["regionCount", filters],
+        queryFn: () => fetchRegionCount(filters),
     });
 }

@@ -79,5 +79,61 @@ class Visualization:
         cache.set_cache(f"data_summary_{query}", response)
         return response
 
+    def get_regions_count(self, filters: List[Filter]) -> dict:
+        query = {}
+        for filter in filters:
+            if filter['type'] == "categorical":
+                query[filter['field']] = {"$in": filter['values']}
+            elif filter['type'] == "numerical":
+                query[filter['field']] = {
+                    "$gte": filter['values'][0], "$lte": filter['values'][1]}
+
+        cached_regions_count = cache.get_cache(f"regions_count_{query}")
+        if cached_regions_count:
+            return {"regions": cached_regions_count, "is_cached": True}
+
+        response = {}
+        regions_count = [
+            {"$match": query},
+            {
+                '$group': {
+                    '_id': {
+                        'id_student': '$id_student',
+                        'region': '$region'
+                    },
+                    'student': {
+                        '$first': '$$ROOT'
+                    }
+                }
+            }, {
+                '$group': {
+                    '_id': '$_id.region',
+                    'count': {
+                        '$count': {}
+                    },
+                    'region': {
+                        '$first': '$_id.region'
+                    }
+                }
+            },
+            {
+                '$project': {
+                    '_id': 0,
+                    'region': 1,
+                    'count': 1
+                }
+            }
+        ]
+
+        try:
+            result = list(self.collection.aggregate(regions_count))
+            response = result
+        except PyMongoError as e:
+            logger.error(f"Error while aggregating data: {e}")
+            raise HTTPException(status_code=500, detail=str(e))
+
+        cache.set_cache(f"regions_count_{query}", response)
+        return {"regions": response, "is_cached": False}
+
 
 visualization = Visualization()

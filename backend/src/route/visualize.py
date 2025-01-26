@@ -5,21 +5,24 @@ from fastapi import APIRouter, HTTPException
 
 from controller.visualization import visualization, Filter
 
-router = APIRouter(prefix="/api", tags=["visualize"])
-
-@router.get("/visualize")
+router = APIRouter(prefix="/api/visualize", tags=["visualize"])
 def initialize_visualization():
     return HTTPException(status_code=501, detail="Visualization not implemented yet")
 
 
-@router.get("/visualize/filters", response_model=List[Filter])
+@router.get("/filters", response_model=List[Filter])
 def get_filters():
     return visualization.get_filters()
 
 
-@router.get("/visualize/data-summary", response_model=dict)
+@router.get("/data-summary", response_model=dict)
 def get_data_summary(filters="{}"):
     logger.debug(f"Filters: {filters}")
     filters = json.loads(filters)
     logger.debug(f"Filters decoded: {filters}")
     return visualization.get_data_summary(filters)
+
+@router.get("/regions-count", response_model=dict)
+def get_regions_count(filters="{}"):
+    filters = json.loads(filters)
+    return visualization.get_regions_count(filters)
