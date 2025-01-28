@@ -74,7 +74,8 @@ You only need to run this script once to initialize the database. (It takes a wh
 
 ### Connection refused to mongodb
 
-If you are running the mongoDB server on windows, and running the backend on WSL, you may encounter a connection refused error. To fix this, you need to change the `bindIp` in the `mongod.conf` file to `0.0.0.0`. [See this article][article1]
+If you are running the mongoDB server on windows, and running the backend on WSL, you may encounter a connection refused error. To fix this, you need to change the `bindIp` in the `mongod.conf` file to `0.0.0.0`. 
+[See this article][article1]
 
 <!-- References -->
 [fastapi]: https://fastapi.tiangolo.com/tutorial/
@@ -86,4 +87,4 @@ If you are running the mongoDB server on windows, and running the backend on WSL
 [plotlyJS]: https://plotly.com/javascript/react/
 [shadcn]: https://ui.shadcn.com/docs
 
-[article1]:[https://medium.com/@uncledev/how-to-connect-a-project-running-wsl-to-mongodb-running-on-windows-609bb7a6e1e8]
+[article1]:https://medium.com/@uncledev/how-to-connect-a-project-running-wsl-to-mongodb-running-on-windows-609bb7a6e1e8
