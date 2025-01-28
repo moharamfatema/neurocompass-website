@@ -43,12 +43,12 @@ const PredictionCards: React.FC<{ prediction: PredictionResult }> = ({
         {
             title: "Preferred Study Method",
             content: learning_path.study_method,
-            description: "The recommended study approach based on learning habits."
+            description: "The recommended study approach based on previous learning habits."
         },
         {
-            title: "Recommended Courses",
+            title: "Recommended Learning Resources & Materials",
             content: learning_path.recommendations,
-            description: "Personalized course recommendations based on the student's unique learning needs."
+            description: "Personalized recommendations based on the engagement level and preferred study method to satisfy student's unique learning needs."
         }
     ];
 
