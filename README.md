@@ -69,6 +69,56 @@ You only need to run this script once to initialize the database. (It takes a wh
 - [PlotlyJS Documentation][plotlyJS]
 - [Shadcn Documentation][shadcn]
 
+# Technologies, Libraries, and Algorithms Used
+
+## Technologies
+- Jupyter Notebook: Used for code execution, visualization, and documentation.
+- Pandas DataFrames: Used for data manipulation, merging, and preprocessing.
+- Plotly Dash / Tableau: Used for interactive data visualization and reporting.
+
+## Libraries
+- Data Handling & Processing:
+    - pandas: For data manipulation and merging multiple tables.
+    - numpy: For numerical computations and array operations.
+
+- Data Visualization:
+    - matplotlib: For static visualizations such as histograms and boxplots.
+    - seaborn: For statistical visualizations, heatmaps, and correlation plots.
+  
+- Machine Learning & Recommendation Systems:
+  - scikit-learn: Provides classification, clustering, and feature engineering tools.
+  - Surprise: A library specialized for building recommendation systems.
+  - KNN (from scikit-learn): Used for collaborative filtering.
+
+## Algorithms
+- 1. Data Analysis & Preprocessing
+  - Descriptive Statistics: Summarizes dataset features.
+  - Data Merging: Uses composite keys (id_student, code_module, code_presentation).
+  - Handling Missing Data: Imputation or removal of missing values.
+  
+- 2. Feature Engineering
+  - One-Hot Encoding: Converts categorical features into numerical values.
+  - Scaling & Normalization: Standardizes numerical features.
+  
+- 3. Machine Learning Models
+  - Classification:
+    - Support Vector Classification (SVC)
+    - Gradient Boosting
+    - Decision Trees
+  
+- 4. Recommendation System
+  - Content-Based Filtering
+    - TF-IDF (Term Frequency-Inverse Document Frequency)
+    - Cosine Similarity (Measures similarity between student interactions)  
+  - Collaborative Filtering
+    - KNN (K-Nearest Neighbors) (Finds similar users/items)
+    - Matrix Factorization (Decomposes interaction data to generate recommendations)
+  
+- 5. Model Evaluation
+  - Precision & Recall (Used for classification performance)
+  - RMSE (Root Mean Square Error) (Evaluates recommendation accuracy)
+  - Confusion Matrix (Analyzes classification results)
+
 
 ## Common issues and solutions
 
