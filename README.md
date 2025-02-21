@@ -219,9 +219,13 @@ The ultimate goal is to **create personalized, data-driven learning experiences*
 - Based on the ML prediction(student study method preference) and student study engagement feature to recommend some learning recourses
 
 ## Visuliazation
-
-![Vis pie chart](file_2025-02-21_20.55.13.png)
+### Pie Chart
+![Pie chart](file_2025-02-21_20.55.13.png)
 - It shows the academic performance and regional distribution of different student groups.
+
+### Histogram
+![Histogram](file_2025-02-21_20.55.39.png)
+- It allows users to filter data based on various factors (such as highest education, final result, course code, region, and socioeconomic background) and view the score distribution of specific student groups. It helps teachers analyze which score ranges have the most students in order to develop more effective learning resource recommendations.
   
 
 ## Common issues and solutions
