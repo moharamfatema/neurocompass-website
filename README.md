@@ -190,7 +190,7 @@ The ultimate goal is to **create personalized, data-driven learning experiences*
 - Machine Learning:
   - scikit-learn: Provides tools for classification, clustering, regression, dimensionality reduction, feature engineering, and model selection.
   
-## Algorithm - classification in Machine Learning
+## Algorithm - Classification in Machine Learning
 ### Data Analysis & Preprocessing
 - Descriptive Statistics: Summarizes dataset features.
 - Data Merging: Uses composite keys (id_student, code_module, code_presentation).
@@ -217,6 +217,11 @@ The ultimate goal is to **create personalized, data-driven learning experiences*
   
 ### Recommendation System
 - Based on the ML prediction(student study method preference) and student study engagement feature to recommend some learning recourses
+
+## Visuliazation
+
+![Vis pie chart](file_2025-02-21_20.55.13.png)
+- It shows the academic performance and regional distribution of different student groups.
   
 
 ## Common issues and solutions
