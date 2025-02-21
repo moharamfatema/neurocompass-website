@@ -58,6 +58,108 @@ python3 Scripts/import_csv.py
 ```
 
 You only need to run this script once to initialize the database. (It takes a while to run)
+# **NeuroCompass-Navigating Learning through Data Visualization and Smart Recommendation**  
+
+## **Project Description**  
+Student engagement is a critical factor in academic success, especially for off-campus learners. This project aims to analyze student interactions, demographics, and course details to identify patterns that influence engagement and performance. By leveraging machine learning techniques, we seek to provide personalized learning recommendations that enhance student outcomes.  
+
+## **Objective**  
+The primary objective of this project is to recommend effective resources and materials that improve student engagement and success. By analyzing student interaction data, we aim to develop insights that facilitate tailored learning experiences, ensuring better academic performance and retention.  
+
+## **Dataset**  
+We utilize the **Open University’s Virtual Learning Environment (VLE) dataset**, which includes:  
+- **Demographic information** (age, gender, prior education, etc.)  
+- **Course details** (modules, assessments, learning activities)  
+- **Student interactions** (logins, clicks, resource usage, forum participation)  
+
+## **Approach**  
+Our approach is data-driven and involves:  
+1. **Data Preprocessing & Exploration** – Cleaning, structuring, and visualizing engagement trends.  
+2. **Feature Engineering** – Extracting key features influencing student success.  
+3. **Model Development** – Applying machine learning models such as decision trees, random forests, and neural networks to predict engagement and performance.  
+4. **Recommendation System** – Generating personalized learning material suggestions based on predictive insights.  
+5. **Evaluation & Optimization** – Measuring model accuracy and refining recommendations for better results.  
+
+## **Goal**  
+The ultimate goal is to **create personalized, data-driven learning experiences** for off-campus students, improving engagement, academic success, and retention rates. By identifying at-risk students early, institutions can intervene with targeted support strategies, ensuring a more inclusive and effective learning environment.  
+
+
+## **Features / Attributes**
+
+### **1. Student Information (`studentInfo.csv`)**
+- **Demographic Details**:
+  - `gender`
+  - `region`
+  - `highest_education`
+  - `imd_band` (socio-economic status)
+  - `age_band`
+  - `disability` status
+- **Academic Background**:
+  - `num_of_prev_attempts` (number of previous attempts)
+  - `studied_credits`
+  - `final_result` (student's outcome in the course)
+
+### **2. Course Information (`courses.csv`)**
+- **Course Details**:
+  - `code_module` (course identifier)
+  - `code_presentation` (presentation period)
+  - `module_presentation_length` (duration of the module in days)
+
+### **3. Assessment Information (`assessments.csv` and `studentAssessment.csv`)**
+- **Assessment Details**:
+  - `id_assessment`
+  - `assessment_type` (e.g., TMA, CMA, Exam)
+  - `date` (scheduled date of assessment)
+  - `weight` (contribution to the final grade)
+- **Student Assessment Records**:
+  - `date_submitted`
+  - `is_banked` (indicates if the assessment result is banked)
+  - `score` obtained by the student
+
+### **4. Virtual Learning Environment (VLE) Interactions (`vle.csv` and `studentVle.csv`)**
+- **Resource Information**:
+  - `id_site` (identifier for the resource)
+  - `activity_type` (type of resource, e.g., forum, quiz)
+  - Availability periods (`week_from`, `week_to`)
+- **Student Interaction Data**:
+  - `date` (interaction date)
+  - `sum_click` (number of times a student interacted with a resource on a given date)
+
+![First Example](https://raw.githubusercontent.com/moharamfatema/neurocompass-website/im-kaustubh-patch-1/D8018053-96C4-42D4-A4CF-A1AAEE1451AE.png)
+
+![Second Example](https://raw.githubusercontent.com/moharamfatema/neurocompass-website/im-kaustubh-patch-1/D8282665-B84F-4DA6-ADAE-7D71F4D3A7E3.png)
+
+
+## **Technical Architecture**
+
+### **1. Data Collection Layer**
+- Extracts student demographics, course details, assessments, and VLE interactions from OULAD.
+- Sources: CSV files (`studentInfo.csv`, `courses.csv`, `assessments.csv`, `studentVle.csv`, etc.).
+
+### **2. Data Preprocessing & Feature Engineering**
+- Handles missing values, normalizes data, and encodes categorical attributes.
+- Extracts meaningful features such as study habits, assessment scores, and engagement metrics.
+
+### **3. Model Training & Development**
+- Implements machine learning models to predict student engagement and success.
+- Techniques used:
+  - Decision Trees
+  - Random Forests
+  - Collaborative Filtering (Matrix Factorization)
+  - Deep Learning (Neural Networks for personalized recommendations)
+
+### **4. Recommendation Engine**
+- Generates personalized learning paths based on model predictions.
+- Suggests relevant courses, resources, and interventions for at-risk students.
+
+### **5. Evaluation & Optimization**
+- Evaluates model performance using metrics like Accuracy, RMSE (for regression), and Precision-Recall (for recommendations).
+- Fine-tunes hyperparameters and retrains models based on student feedback and new data.
+
+### **6. Deployment & User Interface**
+- Deploys the recommendation system as a web or API-based service.
+- Provides an interactive dashboard for students and educators to visualize insights and personalized suggestions.
+
 
 ## Resources
 
