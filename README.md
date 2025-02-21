@@ -88,7 +88,7 @@ You only need to run this script once to initialize the database. (It takes a wh
 - Machine Learning:
   - scikit-learn: Provides tools for classification, clustering, regression, dimensionality reduction, feature engineering, and model selection.
   
-## Algorithm - classification in machine learning
+## Algorithm - classification in Machine Learning
 ### Data Analysis & Preprocessing
 - Descriptive Statistics: Summarizes dataset features.
 - Data Merging: Uses composite keys (id_student, code_module, code_presentation).
