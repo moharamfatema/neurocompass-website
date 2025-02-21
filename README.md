@@ -125,9 +125,9 @@ The ultimate goal is to **create personalized, data-driven learning experiences*
   - `date` (interaction date)
   - `sum_click` (number of times a student interacted with a resource on a given date)
 
-![First Example](https://raw.githubusercontent.com/moharamfatema/neurocompass-website/im-kaustubh-patch-1/D8018053-96C4-42D4-A4CF-A1AAEE1451AE.png)
+![First Example](D8018053-96C4-42D4-A4CF-A1AAEE1451AE.png)
 
-![Second Example](https://raw.githubusercontent.com/moharamfatema/neurocompass-website/im-kaustubh-patch-1/D8282665-B84F-4DA6-ADAE-7D71F4D3A7E3.png)
+![Second Example](D8018053-96C4-42D4-A4CF-A1AAEE1451AE.png)
 
 
 ## **Technical Architecture**
