@@ -85,40 +85,37 @@ You only need to run this script once to initialize the database. (It takes a wh
     - matplotlib: For static visualizations such as histograms and boxplots.
     - seaborn: For statistical visualizations, heatmaps, and correlation plots.
   
-- Machine Learning & Recommendation Systems:
-  - scikit-learn: Provides classification, clustering, and feature engineering tools.
-  - Surprise: A library specialized for building recommendation systems.
-  - KNN (from scikit-learn): Used for collaborative filtering.
-
-## Algorithms
+- Machine Learning:
+  - scikit-learn: Provides tools for classification, clustering, regression, dimensionality reduction, feature engineering, and model selection.
+  
+## Algorithm - classification in machine learning
 - 1. Data Analysis & Preprocessing
   - Descriptive Statistics: Summarizes dataset features.
   - Data Merging: Uses composite keys (id_student, code_module, code_presentation).
   - Handling Missing Data: Imputation or removal of missing values.
   
 - 2. Feature Engineering
-  - One-Hot Encoding: Converts categorical features into numerical values.
-  - Scaling & Normalization: Standardizes numerical features.
+  - Map raw date into features
+  - Two main features: Student study method frature and student engagement feature
+    
+- 3. Scaling & Normalization: prepares data for ML
+  - One-Hot Encoding: Converts categorical feetures into 0 or 1.
+  - MinMaxScaler: Converts numerical features into [0,1]
   
-- 3. Machine Learning Models
-  - Classification:
+- 4. Choosing Machine Learning Models
+  - Classification: predict the class of student study method
     - Support Vector Classification (SVC)
     - Gradient Boosting
-    - Decision Trees
+    - Decision Tree
+   
+- 5. Evaluation models
+ - Compare the accuracy, precision and recall beteewn different models (compare classification performance)
+ - Confusion Matrix (Analyzes classification results)
+ - Finally choose Gradient Boosting because of its best performance
   
 - 4. Recommendation System
-  - Content-Based Filtering
-    - TF-IDF (Term Frequency-Inverse Document Frequency)
-    - Cosine Similarity (Measures similarity between student interactions)  
-  - Collaborative Filtering
-    - KNN (K-Nearest Neighbors) (Finds similar users/items)
-    - Matrix Factorization (Decomposes interaction data to generate recommendations)
+ - Based on the ML prediction(student study method preference) and student study engagement feature to recommend some learning recourses
   
-- 5. Model Evaluation
-  - Precision & Recall (Used for classification performance)
-  - RMSE (Root Mean Square Error) (Evaluates recommendation accuracy)
-  - Confusion Matrix (Analyzes classification results)
-
 
 ## Common issues and solutions
 
