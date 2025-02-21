@@ -89,32 +89,32 @@ You only need to run this script once to initialize the database. (It takes a wh
   - scikit-learn: Provides tools for classification, clustering, regression, dimensionality reduction, feature engineering, and model selection.
   
 ## Algorithm - classification in machine learning
-- 1. Data Analysis & Preprocessing
-  - Descriptive Statistics: Summarizes dataset features.
-  - Data Merging: Uses composite keys (id_student, code_module, code_presentation).
-  - Handling Missing Data: Imputation or removal of missing values.
+### Data Analysis & Preprocessing
+- Descriptive Statistics: Summarizes dataset features.
+- Data Merging: Uses composite keys (id_student, code_module, code_presentation).
+- Handling Missing Data: Imputation or removal of missing values.
   
-- 2. Feature Engineering
-  - Map raw date into features
-  - Two main features: Student study method frature and student engagement feature
+### Feature Engineering
+- Map raw date into features
+- Two main features: Student study method frature and student engagement feature
     
-- 3. Scaling & Normalization: prepares data for ML
-  - One-Hot Encoding: Converts categorical feetures into 0 or 1.
-  - MinMaxScaler: Converts numerical features into [0,1]
+### Scaling & Normalization: prepares data for ML
+- One-Hot Encoding: Converts categorical feetures into 0 or 1.
+- MinMaxScaler: Converts numerical features into [0,1]
   
-- 4. Choosing Machine Learning Models
-  - Classification: predict the class of student study method
-    - Support Vector Classification (SVC)
-    - Gradient Boosting
-    - Decision Tree
+### Choosing Machine Learning Models
+- Classification: predict the class of student study method
+ - Support Vector Classification (SVC)
+ - Gradient Boosting
+ - Decision Tree
    
-- 5. Evaluation models
- - Compare the accuracy, precision and recall beteewn different models (compare classification performance)
- - Confusion Matrix (Analyzes classification results)
- - Finally choose Gradient Boosting because of its best performance
+### Evaluation models
+- Compare the accuracy, precision and recall beteewn different models (compare classification performance)
+- Confusion Matrix (Analyzes classification results)
+- Finally choose Gradient Boosting because of its best performance
   
-- 4. Recommendation System
- - Based on the ML prediction(student study method preference) and student study engagement feature to recommend some learning recourses
+### Recommendation System
+- Based on the ML prediction(student study method preference) and student study engagement feature to recommend some learning recourses
   
 
 ## Common issues and solutions
