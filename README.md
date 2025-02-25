@@ -237,11 +237,17 @@ If you are running the mongoDB server on windows, and running the backend on WSL
 
 ## Thank you all for making the best team
   Fatema Moharam
+  
   Yicong Wei
+  
   Yan Zhang
+  
   Zhenxue Li
+  
   Nitanshu Shahane
+  
   Kaustubh Barbudhe
+  
 
 
 <!-- References -->
