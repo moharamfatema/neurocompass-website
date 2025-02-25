@@ -235,6 +235,15 @@ The ultimate goal is to **create personalized, data-driven learning experiences*
 If you are running the mongoDB server on windows, and running the backend on WSL, you may encounter a connection refused error. To fix this, you need to change the `bindIp` in the `mongod.conf` file to `0.0.0.0`. 
 [See this article][article1]
 
+## Thank you all for making the best team
+  Fatema Moharam
+  Yicong Wei
+  Yan Zhang
+  Zhenxue Li
+  Nitanshu Shahane
+  Kaustubh Barbudhe
+
+
 <!-- References -->
 [fastapi]: https://fastapi.tiangolo.com/tutorial/
 [react]: https://reactjs.org/docs/getting-started.html
