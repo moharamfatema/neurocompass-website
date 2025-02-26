@@ -143,10 +143,10 @@ The ultimate goal is to **create personalized, data-driven learning experiences*
 ### **3. Model Training & Development**
 - Implements machine learning models to predict student engagement and success.
 - Techniques used:
-  - Decision Trees
-  - Random Forests
-  - Collaborative Filtering (Matrix Factorization)
-  - Deep Learning (Neural Networks for personalized recommendations)
+  - Classification: predict the class of student study method
+  - Support Vector Classification (SVC)
+  - Gradient Boosting
+  - Decision Tree
 
 ### **4. Recommendation Engine**
 - Generates personalized learning paths based on model predictions.
